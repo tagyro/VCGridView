@@ -62,6 +62,8 @@
 		_editingSelectionOverlayView.backgroundColor = [UIColor clearColor];
 		_editingSelectionOverlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		[_containerView addSubview:_editingSelectionOverlayView];
+        //
+        [self setUserInteractionEnabled:YES];
 }
     return self;
 }

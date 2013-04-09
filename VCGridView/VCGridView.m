@@ -95,7 +95,11 @@
 	UITouch *touch = [touches anyObject];
 	if ([touch.view isKindOfClass:[VCGridViewCell class]]) {
 		[self didTouchUpCell:(VCGridViewCell*)touch.view];
-	}
+	} else {
+        if ([touch.view.superview isKindOfClass:[VCGridViewCell class]]) {
+            [self didTouchUpCell:(VCGridViewCell*)touch.view.superview];
+        }
+    }
 	
     [super touchesEnded:touches withEvent:event];
 }
@@ -121,12 +125,11 @@
 {
 	[cell setHighlighted:NO animated:YES];
 	NSUInteger index = cell.tag;
-	
 	if (!self.isEditing) {
 		if ([self.delegate respondsToSelector:@selector(gridView:didSelectCellAtIndex:)]) {
 			[self.delegate gridView:self didSelectCellAtIndex:index];
 		}
-	}else {
+	} else {
 		if ([self.dataSource respondsToSelector:@selector(gridView:canEditCellAtIndex:)]) {
 			VCGridViewCell *cell = [self cellAtIndex:index];
 			if ([self.dataSource gridView:self canEditCellAtIndex:index]) {
@@ -194,6 +197,10 @@
 	
 	button = [[self.reusableCells lastObject] retain]; // retain to avoid crash
 	[self.reusableCells removeLastObject];
+    
+    if ([button respondsToSelector:@selector(clearContent)]) {
+        [button performSelector:@selector(clearContent)];
+    }
 
 	return [button autorelease];
 }
