@@ -125,6 +125,7 @@
 {
 	[cell setHighlighted:NO animated:YES];
 	NSUInteger index = cell.tag;
+//	NSLog(@"did select cell");
 	if (!self.isEditing) {
 		if ([self.delegate respondsToSelector:@selector(gridView:didSelectCellAtIndex:)]) {
 			[self.delegate gridView:self didSelectCellAtIndex:index];
@@ -199,7 +200,7 @@
 	[self.reusableCells removeLastObject];
     
     if ([button respondsToSelector:@selector(clearContent)]) {
-        [button performSelector:@selector(clearContent)];
+        [button clearContent];
     }
 
 	return [button autorelease];
