@@ -263,6 +263,9 @@
 
 - (void)layoutCellAtIndex:(NSUInteger)index
 {
+    if (index>self.cells.count) {
+        return;
+    }
 	// get cell at index
 	BOOL shouldLayout = NO;
 	VCGridViewCell *cellButton = [self cellAtIndex:index];
