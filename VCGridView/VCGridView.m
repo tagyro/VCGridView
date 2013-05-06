@@ -182,7 +182,9 @@
 - (void)queueReusableCellButton:(VCGridViewCell *)aCellButton
 {
 	NSUInteger reusableQueueLimit = _numberOfCellsInRow * 2;
-	
+	if ([aCellButton respondsToSelector:@selector(clearContent)]) {
+        [aCellButton clearContent];
+    }
 	if ([self.reusableCells count] >= reusableQueueLimit) {
 		return;
 	}
@@ -199,9 +201,9 @@
 	button = [[self.reusableCells lastObject] retain]; // retain to avoid crash
 	[self.reusableCells removeLastObject];
     
-    if ([button respondsToSelector:@selector(clearContent)]) {
-        [button clearContent];
-    }
+//    if ([button respondsToSelector:@selector(clearContent)]) {
+//        [button clearContent];
+//    }
 
 	return [button autorelease];
 }

@@ -30,7 +30,6 @@
 
 @class VCGridView;
 
-
 /*!
  */
 @protocol VCGridViewDelegate <UIScrollViewDelegate>
